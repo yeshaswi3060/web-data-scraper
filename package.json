@@ -1,0 +1,23 @@
+{
+  "name": "autonomous-property-researcher",
+  "version": "1.0.0",
+  "description": "24/7 Autonomous AI agent that scrapes and extracts property info",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.11.0",
+    "axios": "^1.6.8",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "google-it": "^1.6.4",
+    "googlethis": "^1.8.0",
+    "pdf-parse": "^2.4.5"
+  }
+}

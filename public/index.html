@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NVIDIA Real Estate Extractor Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="glass-bg"></div>
+  <div class="app-container">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-glow"></div>
+        <h1>Property Data Extractor</h1>
+      </div>
+      
+      <div class="agent-status-panel">
+        <div class="status-indicator">
+          <div class="pulse-ring" id="statusRing"></div>
+          <span class="status-dot" id="statusDot"></span>
+          <span class="status-text" id="statusText">Agent Idle</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      <!-- Left sidebar: Controls & Logs -->
+      <section class="control-panel glass-card">
+        <h2>Control Panel</h2>
+        
+
+
+        <!-- Testing Single Property Input -->
+        <div class="panel-section">
+          <label for="propertyNameInput">Target Property Name</label>
+          <div class="input-glow-wrapper">
+            <input type="text" id="propertyNameInput" placeholder="e.g., Puravankara Purva Silver Sky" />
+          </div>
+          <p class="section-hint">Enter the full project name to crawl and parse details.</p>
+        </div>
+
+        <!-- Control Deck Actions -->
+        <div class="panel-section control-actions">
+          <button id="startAgentBtn" class="btn btn-primary">
+            Start Extraction
+          </button>
+          <button id="pauseAgentBtn" class="btn btn-warning" disabled>
+            Pause Task
+          </button>
+          <button id="clearDataBtn" class="btn btn-danger">
+            Reset View
+          </button>
+        </div>
+
+        <!-- Live Terminal logs -->
+        <div class="terminal-section">
+          <div class="terminal-header">
+            <label>Agent Live Activity Logs</label>
+            <button id="clearLogsBtn" class="btn-text">Clear</button>
+          </div>
+          <div class="terminal-body" id="terminalLogs">
+            <div class="log-line system">[SYSTEM] Deck loaded. Awaiting property target.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Dynamic Categorized Property Factsheet Inspector -->
+      <section class="display-panel glass-card">
+        <div class="results-header">
+          <div>
+            <h2 id="activeProjectTitle">No Project Researched Yet</h2>
+            <p id="activeProjectSubtitle">Results will load automatically once the extraction completes.</p>
+          </div>
+          <div class="actions-row" style="display: flex; align-items: center; gap: 15px;">
+            <div id="dataProgressCounter" style="background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 6px 14px; font-weight: bold; display: none;">
+              0 / 0 Extracted
+            </div>
+            <button id="exportCsvBtn" class="btn btn-secondary" disabled>Export CSV</button>
+          </div>
+        </div>
+
+        <!-- Sources Citation Bar -->
+        <div id="sourcesBar" class="sources-container hidden">
+          <strong>Sources Gathered:</strong>
+          <div id="sourcesList" class="sources-links"></div>
+        </div>
+
+        <!-- Files & Media Gallery -->
+        <div id="filesGallery" style="display: none; margin-top: 1rem; padding: 16px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px;">
+          <h3 style="font-size: 14px; margin-bottom: 12px; color: var(--text-primary);">Extracted Media & Files</h3>
+          <div id="filesList" style="display: flex; flex-wrap: wrap; gap: 12px;"></div>
+        </div>
+
+        <!-- Data Grid Container -->
+        <div class="data-grid-container" style="overflow-y: auto; max-height: calc(100vh - 200px); margin-top: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+          <table class="data-table" style="width: 100%; border-collapse: collapse; text-align: left; color: var(--text-primary);">
+            <thead style="background: var(--bg-color); position: sticky; top: 0; z-index: 10;">
+              <tr>
+                <th style="padding: 12px 16px; border-bottom: 1px solid var(--border-color); width: 35%;">Property Key</th>
+                <th style="padding: 12px 16px; border-bottom: 1px solid var(--border-color);">Extracted Value</th>
+              </tr>
+            </thead>
+            <tbody id="dataTableBody">
+              <!-- JS will populate rows dynamically here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
